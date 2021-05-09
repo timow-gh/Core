@@ -11,9 +11,9 @@ set(CMAKE_CXX_EXTENSIONS NO)
 set(BUILD_SHARED_LIBS ON)
 option(${PROJECT_NAME}_INSTALL_LIB "Enable install rule" ON)
 if ((CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR))
-    option(${PROJECT_NAME}_BUILD_TESTS "Enable Core tests" ON)
+    option(${PROJECT_NAME}_BUILD_TESTS "Enable tests" ON)
 else ()
-    option(${PROJECT_NAME}_BUILD_TESTS "Enable Core tests" OFF)
+    option(${PROJECT_NAME}_BUILD_TESTS "Enable tests" OFF)
 endif ()
 
 if (NOT CMAKE_BUILD_TYPE)
@@ -22,6 +22,7 @@ if (NOT CMAKE_BUILD_TYPE)
 endif ()
 
 if (${PROJECT_NAME}_INSTALL_LIB)
+    include(GNUInstallDirs)
     if (NOT CMAKE_GENERATOR STREQUAL "Xcode")
         file(RELATIVE_PATH relDir
              ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}
