@@ -1,19 +1,19 @@
 add_library(absl_interface INTERFACE)
 target_link_libraries(absl_interface INTERFACE absl::base
-        absl::config
-        absl::city
-        absl::hash
-        absl::flat_hash_map
-        absl::strings)
+                      absl::config
+                      absl::city
+                      absl::hash
+                      absl::flat_hash_map
+                      absl::strings)
 
 set(Core_Types_HEADERS
-        ${CMAKE_CURRENT_LIST_DIR}/Core/Types/TArray.hpp
-        ${CMAKE_CURRENT_LIST_DIR}/Core/Types/TString.hpp
-        ${CMAKE_CURRENT_LIST_DIR}/Core/Types/TStringView.hpp
-        ${CMAKE_CURRENT_LIST_DIR}/Core/Types/TSet.hpp
-        ${CMAKE_CURRENT_LIST_DIR}/Core/Types/TMap.hpp
-        ${CMAKE_CURRENT_LIST_DIR}/Core/Types/TVector.hpp
-        ${CMAKE_CURRENT_LIST_DIR}/Core/Types/THashMap.hpp)
+    ${CMAKE_CURRENT_LIST_DIR}/Core/Types/TArray.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Core/Types/TString.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Core/Types/TStringView.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Core/Types/TSet.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Core/Types/TMap.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Core/Types/TVector.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Core/Types/THashMap.hpp)
 
 add_library(Core_Types INTERFACE)
 target_include_directories(Core_Types INTERFACE "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}>")

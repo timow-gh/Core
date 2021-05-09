@@ -2,6 +2,8 @@ add_subdirectory(math)
 add_subdirectory(types)
 
 if (${PROJECT_NAME}_INSTALL_LIB)
+    include(CMakePackageConfigHelpers)
+
     set(${PROJECT_NAME}_INSTALL_CMAKEDIR
             "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
             CACHE STRING "Path to install ${PROJECT_NAME} Config*.cmake files to.")
