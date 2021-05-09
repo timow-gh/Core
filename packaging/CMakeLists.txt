@@ -1,0 +1,34 @@
+set(CPACK_PACKAGE_NAME NonSuperBuild)
+set(CPACK_PACKAGE_VENDOR MyCompany)
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Core functionalty")
+set(CPACK_PACKAGE_INSTALL_DIRECTORY ${CPACK_PACKAGE_NAME})
+set(CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
+set(CPACK_PACKAGE_VERSION_MINOR ${PROJECT_VERSION_MINOR})
+set(CPACK_PACKAGE_VERSION_PATCH ${PROJECT_VERSION_PATCH})
+set(CPACK_VERBATIM_VARIABLES YES)
+set(CPACK_PACKAGE_DESCRIPTION_FILE ${Core_SOURCE_DIR}/Description.txt)
+set(CPACK_RESOURCE_FILE_WELCOME ${Core_SOURCE_DIR}/Welcome.txt)
+set(CPACK_RESOURCE_FILE_LICENSE ${Core_SOURCE_DIR}/License.txt)
+set(CPACK_RESOURCE_FILE_README ${Core_SOURCE_DIR}/ReadMe.md)
+
+include(InstallRequiredSystemLibraries)
+
+if(WIN32)
+    set(CPACK_GENERATOR ZIP WIX)
+elseif(APPLE)
+    set(CPACK_GENERATOR TGZ productbuild)
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    set(CPACK_GENERATOR TGZ RPM)
+else()
+    set(CPACK_GENERATOR TGZ)
+endif()
+
+set(CPACK_SOURCE_IGNORE_FILES
+        /\\.git/
+        \\.swp
+        \\.orig
+        /CMakeLists\\.txt\\.user
+        /privateDir/
+        )
+
+include(CPack)
