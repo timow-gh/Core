@@ -7,13 +7,13 @@ target_link_libraries(absl_interface INTERFACE absl::base
                       absl::strings)
 
 set(Core_Types_HEADERS
-    ${CMAKE_CURRENT_LIST_DIR}/Core/Types/TArray.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/Core/Types/TString.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/Core/Types/TStringView.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/Core/Types/TSet.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/Core/Types/TMap.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/Core/Types/TVector.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/Core/Types/THashMap.hpp)
+    Core/Types/TArray.hpp
+    Core/Types/TString.hpp
+    Core/Types/TStringView.hpp
+    Core/Types/TSet.hpp
+    Core/Types/TMap.hpp
+    Core/Types/TVector.hpp
+    Core/Types/THashMap.hpp)
 
 add_library(Core_Types INTERFACE)
 target_include_directories(Core_Types INTERFACE "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}>")
