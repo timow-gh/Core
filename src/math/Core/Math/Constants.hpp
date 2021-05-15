@@ -1,6 +1,8 @@
 #ifndef CORE_CONSTANTS_H
 #define CORE_CONSTANTS_H
 
+#include <cmath>
+
 namespace Core {
     // As given by Wolfram alpha
     constexpr double_t PI = 3.1415926535897932384626433832795028841971693993751058209749445923;

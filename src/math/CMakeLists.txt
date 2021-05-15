@@ -1,7 +1,6 @@
 set(Core_Math_HEADERS
         Core/Math/Eps.hpp
-        Core/Math/Constants.hpp
-    )
+        Core/Math/Constants.hpp)
 
 add_library(Core_Math INTERFACE)
 target_include_directories(Core_Math INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/>)
