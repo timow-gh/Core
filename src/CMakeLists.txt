@@ -5,11 +5,11 @@ if (${PROJECT_NAME}_INSTALL_LIB)
     include(CMakePackageConfigHelpers)
 
     set(${PROJECT_NAME}_INSTALL_CMAKEDIR
-            "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
-            CACHE STRING "Path to install ${PROJECT_NAME} Config*.cmake files to.")
+        "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
+        CACHE STRING "Path to install ${PROJECT_NAME} Config*.cmake files to.")
     set(${PROJECT_NAME}_MODULE_INSTALL_DIR
-            "${CMAKE_INSTALL_LIBDIR}/cmake"
-            CACHE STRING "Path to install ${PROJECT_NAME}'s .cmake  module files to.")
+        "${CMAKE_INSTALL_LIBDIR}/cmake"
+        CACHE STRING "Path to install ${PROJECT_NAME}'s .cmake  module files to.")
 
     install(EXPORT CoreTargetsExportSet
             NAMESPACE Core::

@@ -3,7 +3,8 @@
 
 #include <string>
 
-namespace Core {
+namespace Core
+{
 using TString = std::string;
 }
 

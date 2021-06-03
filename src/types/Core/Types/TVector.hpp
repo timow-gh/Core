@@ -3,7 +3,8 @@
 
 #include <vector>
 
-namespace Core {
+namespace Core
+{
 template <typename T, typename Alloc = std::allocator<T>>
 using TVector = std::vector<T, Alloc>;
 }

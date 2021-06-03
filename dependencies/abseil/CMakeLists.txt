@@ -1,6 +1,6 @@
 FetchContent_Declare(
         abseil
-        GIT_REPOSITORY  https://github.com/abseil/abseil-cpp.git
+        GIT_REPOSITORY https://github.com/abseil/abseil-cpp.git
         GIT_TAG 20210324.1
 )
 set(ABSL_ENABLE_INSTALL ON)

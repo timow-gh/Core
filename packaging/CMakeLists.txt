@@ -13,22 +13,22 @@ set(CPACK_RESOURCE_FILE_README ${Core_SOURCE_DIR}/ReadMe.md)
 
 include(InstallRequiredSystemLibraries)
 
-if(WIN32)
+if (WIN32)
     set(CPACK_GENERATOR ZIP WIX)
-elseif(APPLE)
+elseif (APPLE)
     set(CPACK_GENERATOR TGZ productbuild)
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+elseif (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     set(CPACK_GENERATOR TGZ RPM)
-else()
+else ()
     set(CPACK_GENERATOR TGZ)
-endif()
+endif ()
 
 set(CPACK_SOURCE_IGNORE_FILES
-        /\\.git/
-        \\.swp
-        \\.orig
-        /CMakeLists\\.txt\\.user
-        /privateDir/
-        )
+    /\\.git/
+    \\.swp
+    \\.orig
+    /CMakeLists\\.txt\\.user
+    /privateDir/
+    )
 
 include(CPack)

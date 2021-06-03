@@ -3,7 +3,8 @@
 
 #include <set>
 
-namespace Core {
+namespace Core
+{
 template <typename T, typename Alloc = std::allocator<T>>
 using TSet = std::set<T, Alloc>;
 }
