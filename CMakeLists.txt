@@ -24,13 +24,15 @@ if (${PROJECT_NAME}_INSTALL_LIB)
     include(GNUInstallDirs)
     if (NOT CMAKE_GENERATOR STREQUAL "Xcode")
         file(RELATIVE_PATH relDir
-             ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}
-             ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
+                ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}
+                ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
         set(CMAKE_INSTALL_RPATH $ORIGIN $ORIGIN/${relDir})
     endif ()
 endif ()
 
-add_subdirectory(packaging)
+if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    add_subdirectory(packaging)
+endif ()
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
