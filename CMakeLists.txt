@@ -3,11 +3,6 @@ project(Core
         VERSION 0.1.0
         LANGUAGES CXX)
 
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED YES)
-set(CMAKE_CXX_EXTENSIONS NO)
 option(${PROJECT_NAME}_INSTALL_LIB "Enable install rule" ON)
 if ((CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR))
     option(${PROJECT_NAME}_BUILD_TESTS "Enable tests" ON)
@@ -15,26 +10,10 @@ else ()
     option(${PROJECT_NAME}_BUILD_TESTS "Enable tests" OFF)
 endif ()
 
-if (NOT CMAKE_BUILD_TYPE)
-    message(STATUS "No build type selected, default to Release")
-    set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
-endif ()
-
-if (${PROJECT_NAME}_INSTALL_LIB)
-    include(GNUInstallDirs)
-    if (NOT CMAKE_GENERATOR STREQUAL "Xcode")
-        file(RELATIVE_PATH relDir
-                ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}
-                ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
-        set(CMAKE_INSTALL_RPATH $ORIGIN $ORIGIN/${relDir})
-    endif ()
-endif ()
-
-if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
-    add_subdirectory(packaging)
-endif ()
-
-set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
+include(CmakeHelperFunctions)
+preamble()
+setMSVCOutputDirectories()
 
 # abseil has an issue for DSOs with default visibilty=hidden
 # https://github.com/abseil/abseil-cpp/issues/225
@@ -49,4 +28,9 @@ if (${PROJECT_NAME}_BUILD_TESTS)
     include(CTest)
     add_subdirectory(tests)
 endif ()
+
+if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    add_subdirectory(packaging)
+endif ()
+
 
