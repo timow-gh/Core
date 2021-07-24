@@ -3,8 +3,8 @@ FetchContent_Declare(
         GIT_REPOSITORY https://github.com/abseil/abseil-cpp.git
         GIT_TAG 20210324.1
 )
-set(ABSL_ENABLE_INSTALL ON)
-set(BUILD_TESTING OFF)
+option(ABSL_ENABLE_INSTALL "" ON)
+option(BUILD_TESTING "" OFF)
 
 FetchContent_MakeAvailable(abseil)
 
