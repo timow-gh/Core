@@ -5,9 +5,9 @@ FetchContent_Declare(twCMakeUtils
         GIT_REPOSITORY https://github.com/timow-gh/twCMakeUtils.git
         GIT_TAG main)
 FetchContent_GetProperties(twCMakeUtils)
-if(NOT twCMakeUtils_POPULATED)
-    set(lcs_twCMakeUtils "")
-    string(TOLOWER "twCMakeUtils" lcs_twCMakeUtils)
+set(lcs_twCMakeUtils "")
+string(TOLOWER "twCMakeUtils" lcs_twCMakeUtils)
+if (NOT ${lcs_twCMakeUtils}_POPULATED)
     FetchContent_Populate(twCMakeUtils)
     list(APPEND CMAKE_MODULE_PATH ${${lcs_twCMakeUtils}_SOURCE_DIR}/modules)
     include(CMakeHelperFunctions)
