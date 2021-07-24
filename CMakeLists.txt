@@ -1,4 +1,18 @@
 cmake_minimum_required(VERSION 3.19)
+
+include(FetchContent)
+FetchContent_Declare(twCMakeUtils
+        GIT_REPOSITORY https://github.com/timow-gh/twCMakeUtils.git
+        GIT_TAG main)
+FetchContent_GetProperties(twCMakeUtils)
+if(NOT twCMakeUtils_POPULATED)
+    set(lcs_twCMakeUtils "")
+    string(TOLOWER "twCMakeUtils" lcs_twCMakeUtils)
+    FetchContent_Populate(twCMakeUtils)
+    list(APPEND CMAKE_MODULE_PATH ${${lcs_twCMakeUtils}_SOURCE_DIR}/modules)
+    include(CMakeHelperFunctions)
+endif()
+
 project(Core
         VERSION 0.1.0
         LANGUAGES CXX)
@@ -17,7 +31,6 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 set(CMAKE_CXX_EXTENSIONS NO)
 
-include(CmakeHelperFunctions)
 preamble()
 
 # abseil has an issue for DSOs with default visibilty=hidden
