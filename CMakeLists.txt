@@ -11,9 +11,14 @@ else ()
 endif ()
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
+
+# TODO Enable CMAKE_CXX_STANDARD >= 11
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED YES)
+set(CMAKE_CXX_EXTENSIONS NO)
+
 include(CmakeHelperFunctions)
 preamble()
-setMSVCOutputDirectories()
 
 # abseil has an issue for DSOs with default visibilty=hidden
 # https://github.com/abseil/abseil-cpp/issues/225

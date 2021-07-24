@@ -5,7 +5,7 @@ function(checkIsVarBuildTypeDefined)
     endif ()
 endfunction()
 
-function(setMSVCOutputDirectories)
+macro(setMSVCOutputDirectories)
     if (MSVC)
         include(GNUInstallDirs)
         if (NOT CMAKE_RUNTIME_OUTPUT_DIRECTORY)
@@ -20,18 +20,13 @@ function(setMSVCOutputDirectories)
             set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR} PARENT_SCOPE)
         endif ()
     endif ()
-endfunction()
+endmacro()
 
 function(preamble)
     checkIsVarBuildTypeDefined()
     setMSVCOutputDirectories()
 
     set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-
-    # TODO Enable CMAKE_CXX_STANDARD >= 11
-    set(CMAKE_CXX_STANDARD 17 PARENT_SCOPE)
-    set(CMAKE_CXX_STANDARD_REQUIRED YES PARENT_SCOPE)
-    set(CMAKE_CXX_EXTENSIONS NO PARENT_SCOPE)
 
     set(CMAKE_CXX_VISIBILITY_PRESET hidden PARENT_SCOPE)
     set(CMAKE_VISIBILITY_INLINES_HIDDEN 1 PARENT_SCOPE)
