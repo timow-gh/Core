@@ -1,5 +1,3 @@
-enable_testing()
-
 include(FetchContent)
 
 option(INSTALL_GTEST OFF)
