@@ -4,7 +4,7 @@ FetchContent_Declare(
         GIT_TAG 20210324.1
 )
 option(ABSL_ENABLE_INSTALL "" ON)
-option(BUILD_TESTING "" OFF)
+set(BUILD_TESTING OFF CACHE BOOL "Dont't build abseil testing" FORCE)
 
 FetchContent_MakeAvailable(abseil)
 
