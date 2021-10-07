@@ -21,6 +21,5 @@ mark_as_advanced(FETCHCONTENT_SOURCE_DIR_GOOGLETEST)
 mark_as_advanced(FETCHCONTENT_UPDATES_DISCONNECTED)
 mark_as_advanced(FETCHCONTENT_UPDATES_DISCONNECTED_GOOGLETEST)
 
-add_subdirectory(test_absl_usage)
 add_subdirectory(test_math)
 add_subdirectory(test_types)

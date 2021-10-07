@@ -1,11 +1,3 @@
-add_library(absl_interface INTERFACE)
-target_link_libraries(absl_interface INTERFACE absl::base
-                      absl::config
-                      absl::city
-                      absl::hash
-                      absl::flat_hash_map
-                      absl::strings)
-
 set(Core_Types_HEADERS
     Core/Types/TArray.hpp
     Core/Types/TString.hpp
@@ -26,7 +18,7 @@ set_target_properties(Core_Types PROPERTIES EXPORT_NAME ${TARGET_ALIAS})
 if (${PROJECT_NAME}_INSTALL_LIB)
     install(FILES ${Core_Types_HEADERS} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/${TARGET_ALIAS}")
 
-    install(TARGETS Core_Types absl_interface
+    install(TARGETS Core_Types
             EXPORT CoreTargetsExportSet
             RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
             LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}

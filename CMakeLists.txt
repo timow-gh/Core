@@ -26,17 +26,7 @@ endif ()
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
-# TODO Enable CMAKE_CXX_STANDARD >= 11
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED YES)
-set(CMAKE_CXX_EXTENSIONS NO)
-
 preamble()
-
-# abseil has an issue for DSOs with default visibilty=hidden
-# https://github.com/abseil/abseil-cpp/issues/225
-set(CMAKE_CXX_VISIBILITY_PRESET default)
-set(CMAKE_VISIBILITY_INLINES_HIDDEN 0)
 
 add_subdirectory(dependencies)
 
