@@ -9,7 +9,6 @@ set(Core_Types_HEADERS
 
 add_library(Core_Types INTERFACE)
 target_include_directories(Core_Types INTERFACE "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}>")
-target_link_libraries(Core_Types INTERFACE absl_interface)
 
 set(TARGET_ALIAS Types)
 add_library(${PROJECT_NAME}::${TARGET_ALIAS} ALIAS Core_Types)

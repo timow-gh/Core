@@ -1,13 +1,18 @@
 #ifndef CORE_THASHMAP_HPP
 #define CORE_THASHMAP_HPP
 
-#include "absl/container/flat_hash_map.h"
-#include "absl/hash/hash.h"
+#include <unordered_map>
 
 namespace Core
 {
-template <typename K, typename V>
-using THashMap = absl::flat_hash_map<K, V>;
+// clang-format off
+template <class TKey,
+          class TValue,
+          class Hash = std::hash<TKey>,
+          class KeyEqual = std::equal_to<TKey>,
+          class Allocator = std::allocator<std::pair<const TKey, TValue>>
+          using THashMap = std::unordered_map<TKey, TValue>;
+// clang-format on
 } // namespace Core
 
 #endif // CORE_THASHMAP_HPP
