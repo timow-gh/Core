@@ -1,7 +1,7 @@
-#include "Core/Types/TVector.hpp"
+#include "twCore/Types/TVector.hpp"
 #include "gtest/gtest.h"
 
-using namespace Core;
+using namespace twCore;
 
 TEST(Test_TVector, TVector)
 {

@@ -1,24 +1,23 @@
-set(Core_Types_HEADERS
-    Core/Types/TArray.hpp
-    Core/Types/TString.hpp
-    Core/Types/TStringView.hpp
-    Core/Types/TSet.hpp
-    Core/Types/TMap.hpp
-    Core/Types/TVector.hpp
-    Core/Types/THashMap.hpp)
+set(twCore_Types_HEADERS
+        twCore/Types/TArray.hpp
+        twCore/Types/TString.hpp
+        twCore/Types/TStringView.hpp
+        twCore/Types/TSet.hpp
+        twCore/Types/TMap.hpp
+        twCore/Types/TVector.hpp
+        twCore/Types/THashMap.hpp)
 
-add_library(Core_Types INTERFACE)
-target_include_directories(Core_Types INTERFACE "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}>")
+add_library(twCore_Types INTERFACE)
+target_include_directories(twCore_Types INTERFACE "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}>")
 
-set(TARGET_ALIAS Types)
-add_library(${PROJECT_NAME}::${TARGET_ALIAS} ALIAS Core_Types)
-set_target_properties(Core_Types PROPERTIES EXPORT_NAME ${TARGET_ALIAS})
+add_library(twCore::Types ALIAS twCore_Types)
+set_target_properties(twCore_Types PROPERTIES EXPORT_NAME twCoreTypes)
 
 if (${PROJECT_NAME}_INSTALL_LIB)
-    install(FILES ${Core_Types_HEADERS} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/${TARGET_ALIAS}")
+    install(FILES ${twCore_Types_HEADERS} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/${TARGET_ALIAS}")
 
-    install(TARGETS Core_Types
-            EXPORT CoreTargetsExportSet
+    install(TARGETS twCore_Types
+            EXPORT twCoreTargetsExportSet
             RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
             LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
             ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}

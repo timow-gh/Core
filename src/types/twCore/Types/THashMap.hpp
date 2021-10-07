@@ -3,7 +3,7 @@
 
 #include <unordered_map>
 
-namespace Core
+namespace twCore
 {
 // clang-format off
 template <class TKey,
@@ -13,6 +13,6 @@ template <class TKey,
           class Allocator = std::allocator<std::pair<const TKey, TValue>>
           using THashMap = std::unordered_map<TKey, TValue>;
 // clang-format on
-} // namespace Core
+} // namespace twCore
 
 #endif // CORE_THASHMAP_HPP

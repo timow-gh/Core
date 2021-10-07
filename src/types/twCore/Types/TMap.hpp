@@ -3,7 +3,7 @@
 
 #include <map>
 
-namespace Core
+namespace twCore
 {
 template <typename K,
           typename T,

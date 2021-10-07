@@ -1,10 +1,10 @@
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "cert-err58-cpp"
 
-#include "Core/Math/Eps.hpp"
+#include "twCore/Math/Eps.hpp"
 #include "gtest/gtest.h"
 
-using namespace Core;
+using namespace twCore;
 
 TEST(Test_Eps, isZeroFloat)
 {

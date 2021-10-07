@@ -3,7 +3,7 @@
 
 #include <string_view>
 
-namespace Core
+namespace twCore
 {
 using TStringView = std::string_view;
 }

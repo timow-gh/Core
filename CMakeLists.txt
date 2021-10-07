@@ -13,7 +13,7 @@ if (NOT ${lcs_twCMakeUtils}_POPULATED)
     include(CMakeHelperFunctions)
 endif()
 
-project(Core
+project(twCore
         VERSION 0.1.0
         LANGUAGES CXX)
 

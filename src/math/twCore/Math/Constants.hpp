@@ -3,7 +3,7 @@
 
 #include <cmath>
 
-namespace Core
+namespace twCore
 {
 // As given by Wolfram alpha
 constexpr double_t PI =
@@ -12,6 +12,6 @@ constexpr double_t PI_HALF =
     1.5707963267948966192313216916397514420985846996875529104874722961;
 constexpr double_t PI_2 =
     6.2831853071795864769252867665590057683943387987502116419498891846;
-} // namespace Core
+} // namespace twCore
 
 #endif // CORE_CONSTANTS_H

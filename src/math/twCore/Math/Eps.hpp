@@ -3,7 +3,7 @@
 
 #include <cmath>
 
-namespace Core
+namespace twCore
 {
 
 constexpr float_t EPS_F = 1.0E-6;
@@ -99,6 +99,6 @@ constexpr bool isEq(T lhs, T rhs)
     return isEq(lhs, rhs, eps_traits<T>::value());
 }
 
-} // namespace Core
+} // namespace twCore
 
 #endif // GLFWTESTAPP_EPS_H

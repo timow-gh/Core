@@ -4,12 +4,12 @@
 #include <array>
 #include <limits>
 
-namespace Core
+namespace twCore
 {
 constexpr std::size_t INVALID_INDEX = std::numeric_limits<std::size_t>::max();
 
 template <typename T, std::size_t N>
 using TArray = std::array<T, N>;
-} // namespace Core
+} // namespace twCore
 
 #endif // CORE_TARRAY_HPP
