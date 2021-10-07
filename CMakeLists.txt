@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.19)
 include(FetchContent)
 FetchContent_Declare(twCMakeUtils
         GIT_REPOSITORY https://github.com/timow-gh/twCMakeUtils.git
-        GIT_TAG refactor-setupExportSetInstall)
+        GIT_TAG main)
 FetchContent_GetProperties(twCMakeUtils)
 set(lcs_twCMakeUtils "")
 string(TOLOWER "twCMakeUtils" lcs_twCMakeUtils)
