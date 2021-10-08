@@ -18,7 +18,7 @@ set_target_properties(Core_Color
         VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}
         DEBUG_POSTFIX d
         LINKER_LANGUAGE CXX
-        EXPORT_NAME CoreColor)
+        EXPORT_NAME Color)
 
 target_include_directories(Core_Color
         PUBLIC
@@ -37,11 +37,10 @@ if (${PROJECT_NAME}_INSTALL_LIB)
             EXPORT CoreTargetsExportSet
             RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
             LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
     string(TOLOWER "${PROJECT_NAME}_export.h" GENERATED_TARGET_EXPORTS_FILE)
     install(FILES "${Core_BINARY_DIR}/src/color/${GENERATED_TARGET_EXPORTS_FILE}"
             DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}")
-
-    setupExportSetInstall("${PROJECT_NAME}" "CoreTargetsExportSet")
 endif ()
