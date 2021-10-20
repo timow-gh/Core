@@ -5,14 +5,12 @@
 
 namespace Core
 {
-// clang-format off
-template <class TKey,
-          class TValue,
-          class Hash = std::hash<TKey>,
-          class KeyEqual = std::equal_to<TKey>,
-          class Allocator = std::allocator<std::pair<const TKey, TValue>>
-          using THashMap = std::unordered_map<TKey, TValue>;
-// clang-format on
+template <class Key,
+          class T,
+          class Hash = std::hash<Key>,
+          class KeyEqual = std::equal_to<Key>,
+          class Allocator = std::allocator<std::pair<const Key, T>>>
+using THashMap = std::unordered_map<Key, T, Hash, KeyEqual, Allocator>;
 } // namespace Core
 
 #endif // CORE_THASHMAP_HPP
