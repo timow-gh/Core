@@ -19,9 +19,9 @@ project(Core
 
 option(${PROJECT_NAME}_INSTALL_LIB "Enable install rule" ON)
 if ((CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR))
-    option(${PROJECT_NAME}_BUILD_TESTS "Enable tests" ON)
+    option(Core_BUILD_TESTS "Enable tests" ON)
 else ()
-    option(${PROJECT_NAME}_BUILD_TESTS "Enable tests" OFF)
+    option(Core_BUILD_TESTS "Enable tests" OFF)
 endif ()
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
@@ -30,7 +30,7 @@ preamble()
 
 add_subdirectory(src)
 
-if (${PROJECT_NAME}_BUILD_TESTS)
+if (Core_BUILD_TESTS)
     include(CTest)
     enable_testing()
     add_subdirectory(tests)
