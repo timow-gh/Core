@@ -1,5 +1,5 @@
-#ifndef GLFWTESTAPP_EPS_H
-#define GLFWTESTAPP_EPS_H
+#ifndef CORE_EPS_H
+#define CORE_EPS_H
 
 #include <cmath>
 
@@ -101,4 +101,4 @@ constexpr bool isEq(T lhs, T rhs)
 
 } // namespace Core
 
-#endif // GLFWTESTAPP_EPS_H
+#endif // CORE_EPS_H
