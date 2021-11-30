@@ -9,13 +9,14 @@ namespace Core
 class Assert
     : public std::exception
 {
+    const char* const m_message;
     const char* const m_function;
     const char* const m_file;
     const uint32_t m_line;
 
   public:
-    Assert(const char* message) NOEXCEPT
-        : std::exception(message)
+    explicit Assert(const char* message) NOEXCEPT
+        : m_message(message)
         , m_function(nullptr)
         , m_file(nullptr)
         , m_line(0)
@@ -26,12 +27,14 @@ class Assert
            const char* function,
            const char* file,
            uint32_t line) NOEXCEPT
-        : std::exception(message)
+        : m_message(message)
         , m_function(function)
         , m_file(file)
         , m_line(line)
     {
     }
+
+    const char* what() const NOEXCEPT override { return m_message; }
 
     static void create(const char* message,
                        const char* function,
