@@ -19,15 +19,16 @@ TEST(Test_PostCondition, core_debug_assert_postcondition_success)
         CORE_DEBUG_ASSERT_POSTCONDITION(ptr, "ptr is not null"));
 }
 
-TEST(Test_PostCondition, core_assert_postcondition_fail)
+TEST(Test_PreCondition, core_debug_assert_precondition_fail)
 {
     int* ptr = nullptr;
-    EXPECT_DEATH(CORE_ASSERT_POSTCONDITION(ptr, "ptr is null"),
+    EXPECT_DEATH(CORE_DEBUG_ASSERT_PRECONDITION(ptr, "ptr is null"),
                  ".*'ptr is null'.*");
 }
 
-TEST(Test_PostCondition, core_assert_postcondition_success)
+TEST(Test_PreCondition, core_debug_assert_precondition_success)
 {
     int* ptr = new int(1);
-    EXPECT_NO_FATAL_FAILURE(CORE_ASSERT_POSTCONDITION(ptr, "ptr is not null"));
+    EXPECT_NO_FATAL_FAILURE(
+        CORE_DEBUG_ASSERT_PRECONDITION(ptr, "ptr is not null"));
 }

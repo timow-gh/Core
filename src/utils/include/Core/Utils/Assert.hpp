@@ -62,11 +62,24 @@ class PostConditionAssert
     using Assert::Assert;
 };
 
+class PreConditionAssert
+    : public Assert
+{
+  public:
+    using Assert::Assert;
+};
+
 #ifndef NDEBUG
 #define FILE_NAME(F) (F)
 #else
 #define FILE_NAME(F) ""
 #endif
+
+#define PRECONDITION_ASSERT(message)                                           \
+    ::Core::PreConditionAssert::create(message,                                \
+                                       __PRETTY_FUNCTION__,                    \
+                                       FILE_NAME(__FILE__),                    \
+                                       __LINE__)
 
 #define POSTCONDITION_ASSERT(message)                                          \
     ::Core::PostConditionAssert::create(message,                               \
@@ -74,16 +87,28 @@ class PostConditionAssert
                                         FILE_NAME(__FILE__),                   \
                                         __LINE__)
 
+#define CORE_ASSERT_PRECONDITION(condition, message)                           \
+    (!CORE_LIKELY(condition) ? PRECONDITION_ASSERT(message)                    \
+                             : static_cast<void>(0))
+
 #define CORE_ASSERT_POSTCONDITION(condition, message)                          \
-    (!CORE_UNLIKELY(condition) ? POSTCONDITION_ASSERT(message)                 \
-                               : static_cast<void>(0))
+    (!CORE_LIKELY(condition) ? POSTCONDITION_ASSERT(message)                   \
+                             : static_cast<void>(0))
+
+#ifdef NDEBUG
+#define CORE_DEBUG_ASSERT_PRECONDITION(condition, message)
+#else
+#define CORE_DEBUG_ASSERT_PRECONDITION(condition, message)                     \
+    (!CORE_LIKELY(condition) ? POSTCONDITION_ASSERT(message)                   \
+                             : static_cast<void>(0))
+#endif
 
 #ifdef NDEBUG
 #define CORE_DEBUG_ASSERT_POSTCONDITION(condition, message)
 #else
 #define CORE_DEBUG_ASSERT_POSTCONDITION(condition, message)                    \
-    (!CORE_UNLIKELY(condition) ? POSTCONDITION_ASSERT(message)                 \
-                               : static_cast<void>(0))
+    (!CORE_LIKELY(condition) ? POSTCONDITION_ASSERT(message)                   \
+                             : static_cast<void>(0))
 #endif
 } // namespace Core
 
