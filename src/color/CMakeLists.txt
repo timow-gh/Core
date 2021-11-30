@@ -25,7 +25,9 @@ target_include_directories(Core_Color
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>"
         "$<BUILD_INTERFACE:${Core_BINARY_DIR}/src/color>")
 
-target_link_libraries(Core_Color PUBLIC Core::Types)
+target_link_libraries(Core_Color
+        PUBLIC Core::Types
+        INTERFACE core_exceptions_rtti_interface)
 
 include(GenerateExportHeader)
 generate_export_header(Core_Color BASE_NAME Core)

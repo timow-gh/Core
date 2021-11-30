@@ -11,7 +11,7 @@ if (NOT ${lcs_twCMakeUtils}_POPULATED)
     FetchContent_Populate(twCMakeUtils)
     list(APPEND CMAKE_MODULE_PATH ${${lcs_twCMakeUtils}_SOURCE_DIR}/modules)
     include(CMakeHelperFunctions)
-endif()
+endif ()
 
 project(Core
         VERSION 0.1.0

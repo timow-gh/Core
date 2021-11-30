@@ -23,3 +23,4 @@ mark_as_advanced(FETCHCONTENT_UPDATES_DISCONNECTED_GOOGLETEST)
 
 add_subdirectory(test_math)
 add_subdirectory(test_types)
+add_subdirectory(test_utils)

@@ -1,9 +1,10 @@
 set(Core_Math_HEADERS
-    Core/Math/Eps.hpp
-    Core/Math/Constants.hpp)
+        Core/Math/Eps.hpp
+        Core/Math/Constants.hpp)
 
 add_library(Core_Math INTERFACE)
 target_include_directories(Core_Math INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/>)
+target_link_libraries(Core_Math INTERFACE core_exceptions_rtti_interface)
 
 set(TARGET_ALIAS Math)
 add_library(${PROJECT_NAME}::${TARGET_ALIAS} ALIAS Core_Math)
