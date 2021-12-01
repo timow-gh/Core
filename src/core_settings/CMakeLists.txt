@@ -1,12 +1,17 @@
 #[[
-    Enable or disable exceptions and rtti for the interface library core_exceptions_rtti_interface.
-    All core libraries link to core_exceptions_rtti_interface.
+    Enable or disable exceptions and rtti for the interface library Core_Settings.
+    All core libraries link to Core_Settings.
+
+    Handeling msvc exception and rtti flags using the CMake file of
+    https://github.com/ned14/status-code
+    as a template.
 ]]
 
 set_property(GLOBAL PROPERTY CXX_EXCEPTIONS ON)
 set_property(GLOBAL PROPERTY CXX_RTTI ON)
 
-add_library(core_exceptions_rtti_interface INTERFACE)
+add_library(Core_Settings INTERFACE)
+add_library(Core::Settings ALIAS Core_Settings)
 
 if (MSVC)
     set(purgelist
@@ -36,11 +41,11 @@ if (MSVC)
         string(REPLACE "-O1" "/O1" ${flag} "${${flag}}")
         string(REPLACE "-O2" "/O2" ${flag} "${${flag}}")
     endforeach ()
-    target_compile_options(core_exceptions_rtti_interface INTERFACE
+    target_compile_options(Core_Settings INTERFACE
             $<$<STREQUAL:$<TARGET_PROPERTY:CXX_EXCEPTIONS>,ON>:/EHsc>
             $<$<STREQUAL:$<TARGET_PROPERTY:CXX_RTTI>,OFF>:/GR->)
 else ()
-    target_compile_options(core_exceptions_rtti_interface INTERFACE
+    target_compile_options(Core_Settings INTERFACE
             $<$<COMPILE_LANGUAGE:CXX>:$<$<STREQUAL:$<TARGET_PROPERTY:CXX_EXCEPTIONS>,ON>:-fexceptions>>
             $<$<COMPILE_LANGUAGE:CXX>:$<$<STREQUAL:$<TARGET_PROPERTY:CXX_RTTI>,ON>:-frtti>>
             $<$<COMPILE_LANGUAGE:CXX>:$<$<STREQUAL:$<TARGET_PROPERTY:CXX_EXCEPTIONS>,OFF>:-fno-exceptions>>
@@ -48,8 +53,13 @@ else ()
             )
 endif ()
 
-target_compile_definitions(core_exceptions_rtti_interface INTERFACE
-        $<$<STREQUAL:$<TARGET_PROPERTY:CXX_EXCEPTIONS>,ON>:CORE_HAS_CXX_EXCEPTIONS>)
+target_compile_definitions(Core_Settings INTERFACE
+        $<$<STREQUAL:$<TARGET_PROPERTY:CXX_EXCEPTIONS>,ON>:CORE_HAS_CXX_EXCEPTIONS>
+        $<$<STREQUAL:$<TARGET_PROPERTY:CXX_RTTI>,ON>:CORE_HAS_CXX_RTTI>)
 
-install(TARGETS core_exceptions_rtti_interface
+export(TARGETS Core_Settings
+        NAMESPACE Core::
+        FILE "${CMAKE_BINARY_DIR}/CoreSettingsExport.cmake")
+
+install(TARGETS Core_Settings
         EXPORT CoreTargetsExportSet)

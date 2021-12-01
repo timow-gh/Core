@@ -4,7 +4,7 @@ set(Core_Math_HEADERS
 
 add_library(Core_Math INTERFACE)
 target_include_directories(Core_Math INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/>)
-target_link_libraries(Core_Math INTERFACE core_exceptions_rtti_interface)
+target_link_libraries(Core_Math INTERFACE Core::Utils)
 
 set(TARGET_ALIAS Math)
 add_library(${PROJECT_NAME}::${TARGET_ALIAS} ALIAS Core_Math)

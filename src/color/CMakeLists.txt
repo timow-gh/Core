@@ -27,10 +27,10 @@ target_include_directories(Core_Color
 
 target_link_libraries(Core_Color
         PUBLIC Core::Types
-        INTERFACE core_exceptions_rtti_interface)
+        INTERFACE Core::Utils)
 
 include(GenerateExportHeader)
-generate_export_header(Core_Color BASE_NAME Core)
+generate_export_header(Core_Color BASE_NAME Color)
 
 if (${PROJECT_NAME}_INSTALL_LIB)
     install(FILES ${Core_COLOR_HEADER} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/Color")
@@ -42,7 +42,6 @@ if (${PROJECT_NAME}_INSTALL_LIB)
             ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
             INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
-    string(TOLOWER "${PROJECT_NAME}_export.h" GENERATED_TARGET_EXPORTS_FILE)
-    install(FILES "${Core_BINARY_DIR}/src/color/${GENERATED_TARGET_EXPORTS_FILE}"
+    install(FILES "${Core_BINARY_DIR}/src/color/color_export.h"
             DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}")
 endif ()

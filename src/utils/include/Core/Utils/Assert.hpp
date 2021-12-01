@@ -2,20 +2,28 @@
 #define CORE_ASSERT_H
 
 #include <Core/Utils/Compiler.hpp>
+#include <cstdint>
+#include <iostream>
+#include <string>
+
+#ifdef CORE_HAS_CXX_EXCEPTIONS
 #include <exception>
+#endif
 
 namespace Core
 {
 class Assert
+#ifdef CORE_HAS_CXX_EXCEPTIONS
     : public std::exception
+#endif
 {
     const char* const m_message;
     const char* const m_function;
     const char* const m_file;
-    const uint32_t m_line;
+    const uint64_t m_line;
 
   public:
-    explicit Assert(const char* message) NOEXCEPT
+    explicit Assert(const char* message) CORE_NOEXCEPT
         : m_message(message)
         , m_function(nullptr)
         , m_file(nullptr)
@@ -26,7 +34,7 @@ class Assert
     Assert(const char* message,
            const char* function,
            const char* file,
-           uint32_t line) NOEXCEPT
+           uint32_t line) CORE_NOEXCEPT
         : m_message(message)
         , m_function(function)
         , m_file(file)
@@ -34,12 +42,17 @@ class Assert
     {
     }
 
-    const char* what() const NOEXCEPT override { return m_message; }
+#ifdef CORE_HAS_CXX_EXCEPTIONS
+    CORE_NODISCARD const char* what() const CORE_NOEXCEPT override
+    {
+        return m_message;
+    }
+#endif
 
     static void create(const char* message,
                        const char* function,
                        const char* file,
-                       uint32_t line) CORE_NORETURN
+                       uint64_t line) CORE_NORETURN
     {
         std::cerr << "Post condition error: '" + std::string(message) << "',\n";
         std::cerr << "File: " + std::string(file) << ",\n";
@@ -52,10 +65,16 @@ class Assert
         std::abort();
     }
 
-    NODISCARD const char* getMessage() const NOEXCEPT { return what(); }
-    NODISCARD const char* getFunction() const NOEXCEPT { return m_function; }
-    NODISCARD const char* getFile() const NOEXCEPT { return m_file; }
-    NODISCARD uint32_t getLine() const NOEXCEPT { return m_line; }
+    CORE_NODISCARD const char* getMessage() const CORE_NOEXCEPT
+    {
+        return m_message;
+    }
+    CORE_NODISCARD const char* getFunction() const CORE_NOEXCEPT
+    {
+        return m_function;
+    }
+    CORE_NODISCARD const char* getFile() const CORE_NOEXCEPT { return m_file; }
+    CORE_NODISCARD uint64_t getLine() const CORE_NOEXCEPT { return m_line; }
 };
 
 class PostConditionAssert
@@ -78,40 +97,38 @@ class PreConditionAssert
 #define FILE_NAME(F) ""
 #endif
 
-#define PRECONDITION_ASSERT(message)                                           \
+#define CORE_PRECONDITION_ASSERT_MESSAGE(message)                              \
     ::Core::PreConditionAssert::create(message,                                \
                                        __PRETTY_FUNCTION__,                    \
                                        FILE_NAME(__FILE__),                    \
                                        __LINE__)
 
-#define POSTCONDITION_ASSERT(message)                                          \
+#define CREATE_POSTCONDITION_ASSERT_MESSAGE(message)                           \
     ::Core::PostConditionAssert::create(message,                               \
                                         __PRETTY_FUNCTION__,                   \
                                         FILE_NAME(__FILE__),                   \
                                         __LINE__)
 
-#define CORE_ASSERT_PRECONDITION(condition, message)                           \
-    (!CORE_LIKELY(condition) ? PRECONDITION_ASSERT(message)                    \
+#define CORE_PRECONDITION_ASSERT(condition, message)                           \
+    (!CORE_LIKELY(condition) ? CORE_PRECONDITION_ASSERT_MESSAGE(message)       \
                              : static_cast<void>(0))
 
-#define CORE_ASSERT_POSTCONDITION(condition, message)                          \
-    (!CORE_LIKELY(condition) ? POSTCONDITION_ASSERT(message)                   \
+#define CORE_POSTCONDITION_ASSERT(condition, message)                          \
+    (!CORE_LIKELY(condition) ? CREATE_POSTCONDITION_ASSERT_MESSAGE(message)    \
                              : static_cast<void>(0))
 
 #ifdef NDEBUG
-#define CORE_DEBUG_ASSERT_PRECONDITION(condition, message)
+#define CORE_PRECONDITION_DEBUG_ASSERT(condition, message)
 #else
-#define CORE_DEBUG_ASSERT_PRECONDITION(condition, message)                     \
-    (!CORE_LIKELY(condition) ? POSTCONDITION_ASSERT(message)                   \
-                             : static_cast<void>(0))
+#define CORE_PRECONDITION_DEBUG_ASSERT(condition, message)                     \
+    CORE_PRECONDITION_ASSERT(condition, message)
 #endif
 
 #ifdef NDEBUG
-#define CORE_DEBUG_ASSERT_POSTCONDITION(condition, message)
+#define CORE_POSTCONDITION_DEBUG_ASSERT(condition, message)
 #else
-#define CORE_DEBUG_ASSERT_POSTCONDITION(condition, message)                    \
-    (!CORE_LIKELY(condition) ? POSTCONDITION_ASSERT(message)                   \
-                             : static_cast<void>(0))
+#define CORE_POSTCONDITION_DEBUG_ASSERT(condition, message)                    \
+    CORE_POSTCONDITION_ASSERT(condition, message)
 #endif
 } // namespace Core
 

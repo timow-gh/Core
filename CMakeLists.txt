@@ -24,6 +24,9 @@ else ()
     option(Core_BUILD_TESTS "Enable tests" OFF)
 endif ()
 
+option(Core_CXX_EXCEPTIONS "Enable CXX exceptions" OFF)
+option(Core_CXX_RTTI "Enable CXX rtti" OFF)
+
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
 preamble()

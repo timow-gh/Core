@@ -1,5 +1,5 @@
 add_subdirectory(color)
-add_subdirectory(core_settings_lib)
+add_subdirectory(core_settings)
 add_subdirectory(math)
 add_subdirectory(types)
 add_subdirectory(utils)

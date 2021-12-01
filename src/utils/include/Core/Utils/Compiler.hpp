@@ -19,12 +19,6 @@
 #    define CORE_NORETURN
 #endif
 
-#if __has_attribute(deprecated)
-#define CORE_DEPRECATED [[deprecated]]
-#else
-#define CORE_DEPRECATED
-#endif
-
 #if __has_attribute(packed)
 #define CORE_PACKED __attribute__((packed))
 #else
@@ -50,10 +44,22 @@
 #define CORE_PREFETCH(exp)
 #endif
 
+#if __has_builtin(__builtin_assume)
+#   define CORE_ASSUME( exp ) (__builtin_assume(exp))
+#else
+#   define UTILS_ASSUME( exp )
+#endif
+
 #if __has_attribute(always_inline)
 #define CORE_ALWAYS_INLINE __attribute__((always_inline))
 #else
 #define CORE_ALWAYS_INLINE
+#endif
+
+#if __has_attribute(noinline)
+#define CORE_NOINLINE __attribute__((noinline))
+#else
+#define CORE_NOINLINE
 #endif
 
 #if __has_attribute(maybe_unused)
@@ -75,16 +81,16 @@
 #define CORE_RESTRICT
 #endif
 
-#ifndef NODISCARD
-#define NODISCARD [[nodiscard]]
+#ifndef CORE_NODISCARD
+#define CORE_NODISCARD [[nodiscard]]
 #else
-#define NODISCARD
+#define CORE_NODISCARD
 #endif
 
-#ifndef NOEXCEPT
-#define NOEXCEPT noexcept
+#ifndef CORE_NOEXCEPT
+#define CORE_NOEXCEPT noexcept
 #else
-#define NOEXCEPT
+#define CORE_NOEXCEPT
 #endif
 
 #if defined(_MSC_VER) && !defined(__PRETTY_FUNCTION__)

@@ -2,11 +2,12 @@
 #define CORE_COLORTHEME_HPP
 
 #include "ColorRGBA.hpp"
-#include "core_export.h"
+#include <Core/Utils/Compiler.hpp>
+#include <color_export.h>
 
 namespace Core
 {
-class CORE_EXPORT ColorTheme
+class COLOR_EXPORT ColorTheme
 {
     ColorRGBA m_backroundColor;
     ColorRGBA m_pointColor;
@@ -16,13 +17,13 @@ class CORE_EXPORT ColorTheme
   public:
     ColorTheme();
 
-    [[nodiscard]] const ColorRGBA& getBackroundColor() const;
+    NODISCARD const ColorRGBA& getBackroundColor() const;
     void setBackroundColor(const ColorRGBA& backroundColor);
-    [[nodiscard]] const ColorRGBA& getPointColor() const;
+    NODISCARD const ColorRGBA& getPointColor() const;
     void setPointColor(const ColorRGBA& pointColor);
-    [[nodiscard]] const ColorRGBA& getLineColor() const;
+    NODISCARD const ColorRGBA& getLineColor() const;
     void setLineColor(const ColorRGBA& lineColor);
-    [[nodiscard]] const ColorRGBA& getTriangleColor() const;
+    NODISCARD const ColorRGBA& getTriangleColor() const;
     void setTriangleColor(const ColorRGBA& triangleColor);
 };
 } // namespace Core
