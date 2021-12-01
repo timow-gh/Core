@@ -12,6 +12,8 @@
 
 namespace Core
 {
+
+template <typename DerivedAssert>
 class Assert
 #ifdef CORE_HAS_CXX_EXCEPTIONS
     : public std::exception
@@ -21,6 +23,12 @@ class Assert
     const char* const m_function;
     const char* const m_file;
     const uint64_t m_line;
+
+  protected:
+    CORE_NODISCARD std::string getMessagePrefix() const CORE_NOEXCEPT
+    {
+        return static_cast<const DerivedAssert*>(this)->getMessagePrefixImpl();
+    }
 
   public:
     explicit Assert(const char* message) CORE_NOEXCEPT
@@ -54,13 +62,10 @@ class Assert
                        const char* file,
                        uint64_t line) CORE_NORETURN
     {
-        std::cerr << "Post condition error: '" + std::string(message) << "',\n";
-        std::cerr << "File: " + std::string(file) << ",\n";
-        std::cerr << "Function:" + std::string(function) << ",\n";
-        std::cerr << "Line: " + std::to_string(line) << std::endl;
-
+        Assert assertion = Assert(message, function, file, line);
+        std::cerr << assertion.composeLogMessage();
 #ifdef CORE_HAS_CXX_EXCEPTIONS
-        throw Assert(message, function, file, line);
+        throw assertion;
 #endif
         std::abort();
     }
@@ -75,20 +80,42 @@ class Assert
     }
     CORE_NODISCARD const char* getFile() const CORE_NOEXCEPT { return m_file; }
     CORE_NODISCARD uint64_t getLine() const CORE_NOEXCEPT { return m_line; }
+
+  private:
+    CORE_NODISCARD std::string composeLogMessage() const CORE_NOEXCEPT
+    {
+        std::string result;
+        result = std::string(getMessagePrefix()) + " error : '" +
+                 std::string(m_message) + "',\n";
+        result += "File: " + std::string(m_file) + ",\n";
+        result += "Function:" + std::string(m_function) + ",\n";
+        result += "Line: " + std::to_string(m_line) + "\n";
+        return result;
+    }
 };
 
 class PostConditionAssert
-    : public Assert
+    : public Assert<PostConditionAssert>
 {
   public:
     using Assert::Assert;
+
+    CORE_NODISCARD std::string getMessagePrefixImpl() const CORE_NOEXCEPT
+    {
+        return std::string{"Postcondition"};
+    }
 };
 
 class PreConditionAssert
-    : public Assert
+    : public Assert<PreConditionAssert>
 {
   public:
     using Assert::Assert;
+
+    CORE_NODISCARD std::string getMessagePrefixImpl() const CORE_NOEXCEPT
+    {
+        return std::string{"Precondition"};
+    }
 };
 
 #ifndef NDEBUG
