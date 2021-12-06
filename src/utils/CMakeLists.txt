@@ -4,7 +4,10 @@ set(Core_Utils_HEADERS
         )
 
 add_library(Core_Utils INTERFACE ${Core_Utils_HEADERS})
-target_include_directories(Core_Utils INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>)
+target_include_directories(Core_Utils
+        INTERFACE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
+        $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/generated>)
 target_link_libraries(Core_Utils INTERFACE Core::Settings)
 
 set(TARGET_ALIAS Utils)
