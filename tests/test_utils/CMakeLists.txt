@@ -1,24 +1,24 @@
-add_executable(test_release_assert test_release_assert.cpp)
-set_target_properties(test_release_assert PROPERTIES
+add_executable(Test_ReleaseAssert Test_ReleaseAssert.cpp)
+set_target_properties(Test_ReleaseAssert PROPERTIES
         CXX_EXCEPTIONS OFF)
-target_link_libraries(test_release_assert PRIVATE gtest_main Core::Utils)
-add_test(NAME test_release_assert COMMAND test_release_assert)
+target_link_libraries(Test_ReleaseAssert PRIVATE gtest_main Core::Utils)
+add_test(NAME Test_ReleaseAssert COMMAND Test_ReleaseAssert)
 
-add_executable(test_debug_assert test_debug_assert.cpp)
-set_target_properties(test_debug_assert PROPERTIES
+add_executable(Test_DebugAssert Test_DebugAssert.cpp)
+set_target_properties(Test_DebugAssert PROPERTIES
         CXX_EXCEPTIONS OFF)
-target_link_libraries(test_debug_assert PRIVATE gtest_main Core::Utils)
-add_test(NAME test_debug_assert COMMAND test_debug_assert)
+target_link_libraries(Test_DebugAssert PRIVATE gtest_main Core::Utils)
+add_test(NAME Test_DebugAssert COMMAND Test_DebugAssert)
 
-add_executable(test_debug_exceptions test_debug_exceptions.cpp)
-target_link_libraries(test_debug_exceptions PRIVATE gtest_main Core::Utils)
-set_target_properties(test_debug_exceptions PROPERTIES
+add_executable(Test_DebugExceptions Test_DebugExceptions.cpp)
+target_link_libraries(Test_DebugExceptions PRIVATE gtest_main Core::Utils)
+set_target_properties(Test_DebugExceptions PROPERTIES
         CXX_EXCEPTIONS ON)
-add_test(NAME test_debug_exceptions COMMAND test_debug_exceptions)
+add_test(NAME Test_DebugExceptions COMMAND Test_DebugExceptions)
 
-add_executable(test_release_exceptions test_release_exceptions.cpp)
-target_link_libraries(test_release_exceptions PRIVATE gtest_main Core::Utils)
-set_target_properties(test_release_exceptions PROPERTIES
+add_executable(Test_ReleaseExceptions Test_ReleaseExceptions.cpp)
+target_link_libraries(Test_ReleaseExceptions PRIVATE gtest_main Core::Utils)
+set_target_properties(Test_ReleaseExceptions PROPERTIES
         CXX_EXCEPTIONS ON)
-add_test(NAME test_release_exceptions COMMAND test_release_exceptions)
+add_test(NAME Test_ReleaseExceptions COMMAND Test_ReleaseExceptions)
 

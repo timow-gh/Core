@@ -15,7 +15,7 @@ jobs:
       matrix:
         config:
           - {
-            name: "GCCLatest",
+            name: "GCC",
             build_type: ["Release", "Debug"],
             cc: "gcc",
             cxx: "g++",
