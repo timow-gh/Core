@@ -94,9 +94,7 @@ class Assert
     }
 };
 
-class PostConditionAssert
-    : public Assert<PostConditionAssert>
-{
+class PostConditionAssert : public Assert<PostConditionAssert> {
   public:
     using Assert::Assert;
 
@@ -106,9 +104,7 @@ class PostConditionAssert
     }
 };
 
-class PreConditionAssert
-    : public Assert<PreConditionAssert>
-{
+class PreConditionAssert : public Assert<PreConditionAssert> {
   public:
     using Assert::Assert;
 
@@ -117,6 +113,7 @@ class PreConditionAssert
         return std::string{"Precondition"};
     }
 };
+} // namespace Core
 
 #ifndef NDEBUG
 #define FILE_NAME(F) (F)
@@ -157,6 +154,5 @@ class PreConditionAssert
 #define CORE_POSTCONDITION_DEBUG_ASSERT(condition, message)                    \
     CORE_POSTCONDITION_ASSERT(condition, message)
 #endif
-} // namespace Core
 
 #endif // CORE_ASSERT_H
