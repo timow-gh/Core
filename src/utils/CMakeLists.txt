@@ -4,7 +4,7 @@ set(Core_Utils_HEADERS
         )
 
 add_library(Core_Utils INTERFACE ${Core_Utils_HEADERS})
-target_compile_features(Core_Utils INTERFACE cxx_constexpr)
+
 target_include_directories(Core_Utils
         INTERFACE
         $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
