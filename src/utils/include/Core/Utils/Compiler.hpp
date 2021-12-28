@@ -14,9 +14,9 @@
 #endif
 
 #if __has_attribute(noreturn)
-#    define CORE_NORETURN __attribute__((noreturn))
+#define CORE_NORETURN __attribute__((noreturn))
 #else
-#    define CORE_NORETURN
+#define CORE_NORETURN
 #endif
 
 #if __has_attribute(packed)
@@ -45,9 +45,9 @@
 #endif
 
 #if __has_builtin(__builtin_assume)
-#   define CORE_ASSUME( exp ) (__builtin_assume(exp))
+#define CORE_ASSUME(exp) (__builtin_assume(exp))
 #else
-#   define UTILS_ASSUME( exp )
+#define UTILS_ASSUME(exp)
 #endif
 
 #if __has_attribute(always_inline)
@@ -91,6 +91,12 @@
 #define CORE_NOEXCEPT noexcept
 #else
 #define CORE_NOEXCEPT
+#endif
+
+#if ((defined(_MSVC_LANG) && _MSVC_LANG >= 200704L) || defined(__cpp_constexpr))
+#define CORE_CONSTEXPR constexpr
+#else
+#define CORE_CONSTEXPR
 #endif
 
 #if defined(_MSC_VER) && !defined(__PRETTY_FUNCTION__)
