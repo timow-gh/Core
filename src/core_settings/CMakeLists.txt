@@ -27,11 +27,17 @@ target_compile_definitions(Core_Settings INTERFACE
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR
         "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     find_program(CORE_LDD_PROGRAM NAMES "lld")
-    if (CORE_LDD_PROGRAM-NOTFOUND)
+    if (NOT CORE_LDD_PROGRAM)
         message(WARNING "Linker lld not found, using default linker.")
     else ()
-        message(STATUS "Linker lld found.")
+        message(STATUS "Found linker lld.")
+        target_link_options(Core_Settings INTERFACE
+                "fuse-ld=lld"
+                )
     endif ()
+    target_link_options(Core_Settings INTERFACE
+            "-Wl,--fatal-warnings"
+            )
 endif ()
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
@@ -88,13 +94,6 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
             "-Wno-unused-template"
             # https://bugs.llvm.org/show_bug.cgi?id=44325
             "-Wno-zero-as-null-pointer-constant"
-            )
-#    add_custom_target(print
-#            ${CMAKE_COMMAND} -E echo "test generator expression here"
-#            )
-    target_link_options(Core_Settings INTERFACE
-            "$<$<BOOL:CORE_LDD_PROGRAM>:-fuse-ld=lld>"
-            "-Wl,--fatal-warnings"
             )
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     message(STATUS "Compiler Settings ${CMAKE_CXX_COMPILER_ID}")
@@ -183,11 +182,6 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
             # emulation
             # "-Wzero-as-null-pointer-constant"
             )
-    target_link_options(Core_Settings INTERFACE
-            "$<$<BOOL:CORE_LDD_PROGRAM>:-fuse-ld=lld>"
-            "-Wl,--fatal-warnings"
-            )
-
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
     message(STATUS "Compiler Settings ${CMAKE_CXX_COMPILER_ID}")
     # Purge unconditional use of these flags
