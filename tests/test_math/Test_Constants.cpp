@@ -25,17 +25,17 @@ TEST(PI_2, AsDouble)
 TEST(PI, AsFloat)
 {
     float_t piFloat = PI<float_t>;
-    EXPECT_FLOAT_EQ(piFloat, 3.1415927410125732);
+    EXPECT_FLOAT_EQ(piFloat, 3.1415927410125732f);
 }
 
 TEST(PI_HALF, AsFloat)
 {
     float_t piHalfFloat = PI_HALF<float_t>;
-    EXPECT_FLOAT_EQ(piHalfFloat, 1.570796326794896);
+    EXPECT_FLOAT_EQ(piHalfFloat, 1.570796326794896f);
 }
 
 TEST(PI_2, AsFloat)
 {
     float_t piTwoFloat = PI_2<float_t>;
-    EXPECT_FLOAT_EQ(piTwoFloat, 6.283185307179586);
+    EXPECT_FLOAT_EQ(piTwoFloat, 6.283185307179586f);
 }

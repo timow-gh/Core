@@ -24,6 +24,16 @@ target_compile_definitions(Core_Settings INTERFACE
     https://github.com/davidstone/cmake_Core_Settings/blob/main/CMakeLists.txt
 ]]
 
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR
+        "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+    find_program(CORE_LDD_PROGRAM NAMES "lld")
+    if (CORE_LDD_PROGRAM-NOTFOUND)
+        message(WARNING "Linker lld not found, using default linker.")
+    else ()
+        message(STATUS "Linker lld found.")
+    endif ()
+endif ()
+
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     message(STATUS "Compiler Settings ${CMAKE_CXX_COMPILER_ID}")
     if (MSVC)
@@ -41,6 +51,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
             "-Weverything"
             "-Wno-global-constructors"
             "-Werror"
+            "-Wconversion"
             # google tests return sentinels are marked unused but are used
             "-Wno-used-but-marked-unused"
             "-Wno-covered-switch-default"
@@ -78,10 +89,13 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
             # https://bugs.llvm.org/show_bug.cgi?id=44325
             "-Wno-zero-as-null-pointer-constant"
             )
-        target_link_options(Core_Settings INTERFACE
-                "-fuse-ld=lld"
-                "-Wl,--fatal-warnings"
-                )
+#    add_custom_target(print
+#            ${CMAKE_COMMAND} -E echo "test generator expression here"
+#            )
+    target_link_options(Core_Settings INTERFACE
+            "$<$<BOOL:CORE_LDD_PROGRAM>:-fuse-ld=lld>"
+            "-Wl,--fatal-warnings"
+            )
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     message(STATUS "Compiler Settings ${CMAKE_CXX_COMPILER_ID}")
     target_compile_options(Core_Settings INTERFACE
@@ -95,7 +109,7 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
             "-Wcast-align"
             "-Wcast-qual"
             # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=39170
-            #"-Wconversion"
+            "-Wconversion"
             # A reasonable code pattern is to use a private member function with
             # `if constexpr (requires { expr; }) { static_assert(expr); } }`
             # This might be the only member function of a class if it's a trait
@@ -121,7 +135,7 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
             "-Wmissing-declarations"
             # -Wmissing-format-attribute is not used because I do not use GNU
             # extensions. Same for -Wsuggest-attribute and several others.
-#            "-Wmissing-include-dirs"
+            # "-Wmissing-include-dirs"
             #"-Wnoexcept"
             "-Wno-non-template-friend"
             "-Wold-style-cast"
@@ -170,9 +184,10 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
             # "-Wzero-as-null-pointer-constant"
             )
     target_link_options(Core_Settings INTERFACE
-            "-fuse-ld=lld"
+            "$<$<BOOL:CORE_LDD_PROGRAM>:-fuse-ld=lld>"
             "-Wl,--fatal-warnings"
             )
+
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
     message(STATUS "Compiler Settings ${CMAKE_CXX_COMPILER_ID}")
     # Purge unconditional use of these flags
