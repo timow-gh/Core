@@ -13,47 +13,36 @@ set_property(GLOBAL PROPERTY CXX_RTTI ON)
 add_library(Core_Settings INTERFACE)
 add_library(Core::Settings ALIAS Core_Settings)
 
+target_compile_features(Core_Settings INTERFACE cxx_std_17)
+
 target_compile_definitions(Core_Settings INTERFACE
         $<$<STREQUAL:$<TARGET_PROPERTY:CXX_EXCEPTIONS>,ON>:CORE_HAS_CXX_EXCEPTIONS>
         $<$<STREQUAL:$<TARGET_PROPERTY:CXX_RTTI>,ON>:CORE_HAS_CXX_RTTI>)
 
 #[[
     Clang and gcc compile and link options based on:
-    https://github.com/davidstone/cmake_strict_defaults/blob/main/CMakeLists.txt
+    https://github.com/davidstone/cmake_Core_Settings/blob/main/CMakeLists.txt
 ]]
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+    message(STATUS "Compiler Settings ${CMAKE_CXX_COMPILER_ID}")
     if (MSVC)
         # Sanitizers currently do not work very well on Windows
         set(use_sanitizers OFF)
-
-        target_compile_options(strict_defaults_interface INTERFACE
-                "/std:c++latest"
-                )
-        target_compile_options(strict_defaults INTERFACE
+        target_compile_options(Core_Settings INTERFACE
                 "/MP"
                 )
-        target_link_options(strict_defaults INTERFACE
+        target_link_options(Core_Settings INTERFACE
                 "/WX"
-                )
-    else ()
-        target_compile_options(strict_defaults_interface INTERFACE
-                "-std=c++2b"
-                "-fmodules"
-                )
-        target_link_options(strict_defaults_interface INTERFACE
-                "-fuse-ld=lld"
-                )
-        target_link_options(strict_defaults INTERFACE
-                "-Wl,--fatal-warnings"
-                # TODO: Figure out how to make this work on Visual Studio
-                "-Wl,--thinlto-cache-dir=${CMAKE_BINARY_DIR}/lto-cache"
                 )
     endif ()
 
-    target_compile_options(strict_defaults INTERFACE
-            "-Weverything"
+    target_compile_options(Core_Settings INTERFACE
+#            "-Weverything"
+            "-Wno-global-constructors"
             "-Werror"
+            # google tests return sentinels are marked unused but are used
+#            "-Wused-but-marked-unused"
             # Don't need compatibility with older standards
             "-Wno-c++98-compat"
             # Don't need compatibility with older standards
@@ -85,24 +74,19 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
             "-Wno-unused-function"
             # https://llvm.org/bugs/show_bug.cgi?id=25084
             "-Wno-unused-template"
-            # -Wweak-vtables is incompatible with header-only libraries. It also
-            # becomes irrelevant after modules.
-            "-Wno-weak-vtables"
             # https://bugs.llvm.org/show_bug.cgi?id=44325
             "-Wno-zero-as-null-pointer-constant"
-
-            "-g"
-            $<$<CONFIG:Release>:-flto=thin>
             )
-
+        target_link_options(Core_Settings INTERFACE
+                "-fuse-ld=lld"
+                "-Wl,--fatal-warnings"
+                )
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-    target_compile_options(strict_defaults_interface INTERFACE
-            "-std=c++2b"
-            "-fconcepts"
-            )
-
-    target_compile_options(strict_defaults INTERFACE
+    message(STATUS "Compiler Settings ${CMAKE_CXX_COMPILER_ID}")
+    target_compile_options(Core_Settings INTERFACE
             "-Wall"
+            "-Wno-global-constructors"
+            "-Werror"
             "-Wextra"
             "-Wpedantic"
             # Do not care about ABI differences
@@ -136,7 +120,7 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
             "-Wmissing-declarations"
             # -Wmissing-format-attribute is not used because I do not use GNU
             # extensions. Same for -Wsuggest-attribute and several others.
-            "-Wmissing-include-dirs"
+#            "-Wmissing-include-dirs"
             #"-Wnoexcept"
             "-Wno-non-template-friend"
             "-Wold-style-cast"
@@ -183,16 +167,13 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
             # -Wzero-as-null-pointer-constant does not work with the `operator<=>`
             # emulation
             # "-Wzero-as-null-pointer-constant"
-            "-Werror"
-
-            "-g"
-            # $<$<CONFIG:Release>:-flto=4 -flto-odr-type-merging -fuse-linker-plugin>
             )
-    target_link_options(strict_defaults INTERFACE
+    target_link_options(Core_Settings INTERFACE
+            "-fuse-ld=lld"
             "-Wl,--fatal-warnings"
             )
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
-    message(STATUS "Unknown compiler ${CMAKE_CXX_COMPILER_ID}")
+    message(STATUS "Compiler Settings ${CMAKE_CXX_COMPILER_ID}")
     # Purge unconditional use of these flags
     set(purgelist
             "/EHsc"
@@ -228,8 +209,8 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 endif ()
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"
-    OR
-    "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+        OR
+        "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     target_compile_options(Core_Settings INTERFACE
             $<$<COMPILE_LANGUAGE:CXX>:$<$<STREQUAL:$<TARGET_PROPERTY:CXX_EXCEPTIONS>,ON>:-fexceptions>>
             $<$<COMPILE_LANGUAGE:CXX>:$<$<STREQUAL:$<TARGET_PROPERTY:CXX_RTTI>,ON>:-frtti>>

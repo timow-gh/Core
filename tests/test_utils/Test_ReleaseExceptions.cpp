@@ -1,4 +1,4 @@
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 #include <Core/Utils/Assert.hpp>
 
 TEST(Test_PostCondition, core_assert_postcondition_fail)

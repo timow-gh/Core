@@ -1,5 +1,5 @@
-#include "Core/Types/TMap.hpp"
-#include "gtest/gtest.h"
+#include <Core/Types/TMap.hpp>
+#include <gtest/gtest.h>
 
 using namespace Core;
 

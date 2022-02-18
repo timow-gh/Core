@@ -1,5 +1,5 @@
-#include "Core/Types/TSet.hpp"
-#include "gtest/gtest.h"
+#include <Core/Types/TSet.hpp>
+#include <gtest/gtest.h>
 
 using namespace Core;
 

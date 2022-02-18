@@ -1,5 +1,5 @@
-#include "Core/Types/THashMap.hpp"
-#include "gtest/gtest.h"
+#include <Core/Types/THashMap.hpp>
+#include <gtest/gtest.h>
 
 using namespace Core;
 

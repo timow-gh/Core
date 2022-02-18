@@ -1,8 +1,5 @@
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "cert-err58-cpp"
-
-#include "Core/Math/Eps.hpp"
-#include "gtest/gtest.h"
+#include <Core/Math/Eps.hpp>
+#include <gtest/gtest.h>
 
 using namespace Core;
 
@@ -32,7 +29,7 @@ TEST(Test_Eps, isLessFloat)
 
 TEST(Test_Eps, isLessDouble)
 {
-    double_t lhs = 0.0f;
+    double_t lhs = 0.0;
     double_t rhs = eps_traits<double_t>::value();
     EXPECT_FALSE(isLess(lhs, rhs));
     EXPECT_TRUE(isLess(lhs - eps_traits<double_t>::value(), rhs));
@@ -65,8 +62,8 @@ TEST(Test_Eps, isGreaterFloat)
 
 TEST(Test_Eps, isGreaterDouble)
 {
-    double_t lhs = 0.0f;
-    EXPECT_TRUE(isGreater(lhs, -1.1f * eps_traits<double_t>::value()));
+    double_t lhs = 0.0;
+    EXPECT_TRUE(isGreater(lhs, -1.1 * eps_traits<double_t>::value()));
     EXPECT_FALSE(isGreater(lhs, eps_traits<double_t>::value()));
 }
 
@@ -109,5 +106,3 @@ TEST(Test_Eps, isEqualDouble)
     EXPECT_FALSE(isEq(zeroVal, eps));
     EXPECT_FALSE(isEq(zeroVal, 1.0));
 }
-
-#pragma clang diagnostic pop

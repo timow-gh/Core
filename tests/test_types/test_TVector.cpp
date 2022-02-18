@@ -1,5 +1,5 @@
-#include "Core/Types/TVector.hpp"
-#include "gtest/gtest.h"
+#include <Core/Types/TVector.hpp>
+#include <gtest/gtest.h>
 
 using namespace Core;
 

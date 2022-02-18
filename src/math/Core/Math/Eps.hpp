@@ -7,7 +7,7 @@
 namespace Core
 {
 
-CORE_CONSTEXPR float_t EPS_F = 1.0E-6;
+CORE_CONSTEXPR float_t EPS_F = 1.0E-6f;
 CORE_CONSTEXPR double_t EPS_D = 1.0E-15;
 
 CORE_CONSTEXPR float_t ZERO_F = 0.0f;
@@ -19,13 +19,13 @@ struct eps_traits;
 template <>
 struct eps_traits<float_t>
 {
-    static CORE_CONSTEXPR float_t value() { return EPS_F; };
+    static CORE_CONSTEXPR float_t value() { return EPS_F; }
 };
 
 template <>
 struct eps_traits<double_t>
 {
-    static CORE_CONSTEXPR double_t value() { return EPS_D; };
+    static CORE_CONSTEXPR double_t value() { return EPS_D; }
 };
 
 template <typename T>

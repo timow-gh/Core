@@ -1,4 +1,4 @@
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 
 #ifdef NDEBUG
 #undef NDEBUG
@@ -9,7 +9,7 @@ TEST(Test_PostCondition, core_debug_assert_postcondition_fail)
 {
     int* ptr = nullptr;
     EXPECT_DEATH(CORE_POSTCONDITION_DEBUG_ASSERT(ptr, "ptr is null"),
-                 ".*'ptr is null'.*");
+                            ".*'ptr is null'.*");
 }
 
 TEST(Test_PostCondition, core_debug_assert_postcondition_success)

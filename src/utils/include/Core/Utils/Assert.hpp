@@ -42,7 +42,7 @@ class Assert
     Assert(const char* message,
            const char* function,
            const char* file,
-           uint32_t line) CORE_NOEXCEPT
+           std::uint64_t line) CORE_NOEXCEPT
         : m_message(message)
         , m_function(function)
         , m_file(file)
@@ -60,7 +60,7 @@ class Assert
     static void create(const char* message,
                        const char* function,
                        const char* file,
-                       uint64_t line) CORE_NORETURN
+                       std::uint64_t line) CORE_NORETURN
     {
         Assert assertion = Assert(message, function, file, line);
         std::cerr << assertion.composeLogMessage();

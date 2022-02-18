@@ -1,8 +1,5 @@
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "cert-err58-cpp"
-
-#include "Core/Math/Constants.hpp"
-#include "gtest/gtest.h"
+#include <Core/Math/Constants.hpp>
+#include <gtest/gtest.h>
 #include <cmath>
 
 using namespace Core;
@@ -42,5 +39,3 @@ TEST(PI_2, AsFloat)
     float_t piTwoFloat = PI_2<float_t>;
     EXPECT_FLOAT_EQ(piTwoFloat, 6.283185307179586);
 }
-
-#pragma clang diagnostic pop
