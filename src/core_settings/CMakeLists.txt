@@ -38,11 +38,12 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     endif ()
 
     target_compile_options(Core_Settings INTERFACE
-#            "-Weverything"
+            "-Weverything"
             "-Wno-global-constructors"
             "-Werror"
             # google tests return sentinels are marked unused but are used
-#            "-Wused-but-marked-unused"
+            "-Wno-used-but-marked-unused"
+            "-Wno-covered-switch-default"
             # Don't need compatibility with older standards
             "-Wno-c++98-compat"
             # Don't need compatibility with older standards
