@@ -21,7 +21,7 @@ target_compile_definitions(Core_Settings INTERFACE
 
 #[[
     Clang and gcc compile and link options based on:
-    https://github.com/davidstone/cmake_Core_Settings/blob/main/CMakeLists.txt
+    https://github.com/davidstone/cmake_strict_defaults/
 ]]
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR
@@ -100,10 +100,10 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     message(STATUS "Compiler Settings ${CMAKE_CXX_COMPILER_ID}")
     target_compile_options(Core_Settings INTERFACE
             "-Wall"
-            "-Wno-global-constructors"
-            "-Werror"
             "-Wextra"
             "-Wpedantic"
+            "-Werror"
+#            "-Wno-global-constructors"
             # Do not care about ABI differences
             # "-Wabi"
             "-Wcast-align"
