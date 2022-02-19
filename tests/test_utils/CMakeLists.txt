@@ -11,7 +11,7 @@ target_link_libraries(Test_DebugAssert PRIVATE gtest_main Core::Utils)
 add_test(NAME Test_DebugAssert COMMAND Test_DebugAssert)
 
 add_executable(Test_DebugExceptions Test_DebugExceptions.cpp)
-target_link_libraries(Test_DebugExceptions PRIVATE gtest_main Core::Utils)
+target_link_libraries(Test_DebugExceptions PRIVATE gtest_main Core::Settings Core::Utils)
 set_target_properties(Test_DebugExceptions PROPERTIES
         CXX_EXCEPTIONS ON)
 add_test(NAME Test_DebugExceptions COMMAND Test_DebugExceptions)
