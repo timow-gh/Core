@@ -13,8 +13,6 @@ set_property(GLOBAL PROPERTY CXX_RTTI ON)
 add_library(Core_Settings INTERFACE)
 add_library(Core::Settings ALIAS Core_Settings)
 
-target_compile_features(Core_Settings INTERFACE cxx_std_17)
-
 target_compile_definitions(Core_Settings INTERFACE
         $<$<STREQUAL:$<TARGET_PROPERTY:CXX_EXCEPTIONS>,ON>:CORE_HAS_CXX_EXCEPTIONS>
         $<$<STREQUAL:$<TARGET_PROPERTY:CXX_RTTI>,ON>:CORE_HAS_CXX_RTTI>)

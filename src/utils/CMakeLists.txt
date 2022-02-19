@@ -9,6 +9,7 @@ target_include_directories(Core_Utils
         INTERFACE
         $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
         $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/generated>)
+target_compile_features(Core_Utils INTERFACE cxx_std_17)
 
 set(TARGET_ALIAS Utils)
 add_library(${PROJECT_NAME}::${TARGET_ALIAS} ALIAS Core_Utils)
