@@ -32,7 +32,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR
     else ()
         message(STATUS "Found linker lld.")
         target_link_options(Core_Settings INTERFACE
-                "fuse-ld=lld"
+                "-fuse-ld=lld"
                 )
     endif ()
     target_link_options(Core_Settings INTERFACE
@@ -57,7 +57,8 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
             "-Weverything"
             "-Wno-global-constructors"
             "-Werror"
-            "-Wconversion"
+            # There are too many warnings in third party libraries.
+            # "-Wconversion"
             # google tests return sentinels are marked unused but are used
             "-Wno-used-but-marked-unused"
             "-Wno-covered-switch-default"
@@ -108,7 +109,8 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
             "-Wcast-align"
             "-Wcast-qual"
             # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=39170
-            "-Wconversion"
+            # There are too many warnings in third party libraries.
+            # "-Wconversion"
             # A reasonable code pattern is to use a private member function with
             # `if constexpr (requires { expr; }) { static_assert(expr); } }`
             # This might be the only member function of a class if it's a trait
