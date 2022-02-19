@@ -9,7 +9,6 @@ target_include_directories(Core_Utils
         INTERFACE
         $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
         $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/generated>)
-target_link_libraries(Core_Utils INTERFACE Core::Settings)
 
 set(TARGET_ALIAS Utils)
 add_library(${PROJECT_NAME}::${TARGET_ALIAS} ALIAS Core_Utils)
