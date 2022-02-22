@@ -24,6 +24,7 @@ else ()
     option(Core_BUILD_TESTS "Enable tests" OFF)
 endif ()
 
+option(Core_USE_WARNINGS "Activates all warnings as errors." OFF)
 option(Core_CXX_EXCEPTIONS "Enable CXX exceptions" OFF)
 option(Core_CXX_RTTI "Enable CXX rtti" OFF)
 
