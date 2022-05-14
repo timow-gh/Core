@@ -5,7 +5,9 @@
 
 namespace Core
 {
+
 using TString = std::string;
+
 }
 
 #endif // CORE_TSTRING_HPP

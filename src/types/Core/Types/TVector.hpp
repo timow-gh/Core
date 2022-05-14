@@ -5,8 +5,10 @@
 
 namespace Core
 {
+
 template <typename T, typename Alloc = std::allocator<T>>
 using TVector = std::vector<T, Alloc>;
+
 }
 
 #endif // CORE_TVECTOR_HPP

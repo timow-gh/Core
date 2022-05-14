@@ -17,6 +17,14 @@ project(Core
         VERSION 0.1.0
         LANGUAGES CXX)
 
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+if (NOT CMAKE_CXX_STANDARD)
+    message(FATAL_ERROR "CMAKE_CXX_STANDARD not defined.")
+    return()
+endif ()
+
+
 option(${PROJECT_NAME}_INSTALL_LIB "Enable install rule" ON)
 if ((CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR))
     option(Core_BUILD_TESTS "Enable tests" ON)
@@ -32,6 +40,7 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
 preamble()
 
+add_subdirectory(dependencies)
 add_subdirectory(src)
 
 if (Core_BUILD_TESTS)

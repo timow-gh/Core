@@ -6,6 +6,10 @@ add_executable(test_TSet test_TSet.cpp)
 target_link_libraries(test_TSet PRIVATE gtest_main Core::Types)
 add_test(NAME test_TSet COMMAND test_TSet)
 
+add_executable(test_TSpan test_TSpan.cpp)
+target_link_libraries(test_TSpan PRIVATE gtest_main Core::Types)
+add_test(NAME test_TSpan COMMAND test_TSpan)
+
 add_executable(test_TMap test_TMap.cpp)
 target_link_libraries(test_TMap PRIVATE gtest_main Core::Types)
 add_test(NAME test_TMap COMMAND test_TMap)
