@@ -10,6 +10,10 @@ add_executable(test_TSpan test_TSpan.cpp)
 target_link_libraries(test_TSpan PRIVATE gtest_main Core::Types)
 add_test(NAME test_TSpan COMMAND test_TSpan)
 
+add_executable(test_TStringView test_TStringView.cpp)
+target_link_libraries(test_TStringView PRIVATE gtest_main Core::Types)
+add_test(NAME test_TStringView COMMAND test_TStringView)
+
 add_executable(test_TMap test_TMap.cpp)
 target_link_libraries(test_TMap PRIVATE gtest_main Core::Types)
 add_test(NAME test_TMap COMMAND test_TMap)
