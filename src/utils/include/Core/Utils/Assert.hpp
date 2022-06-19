@@ -78,8 +78,14 @@ class Assert
     {
         return m_function;
     }
-    CORE_NODISCARD const char* getFile() const CORE_NOEXCEPT { return m_file; }
-    CORE_NODISCARD uint64_t getLine() const CORE_NOEXCEPT { return m_line; }
+    CORE_NODISCARD const char* getFile() const CORE_NOEXCEPT
+    {
+        return m_file;
+    }
+    CORE_NODISCARD uint64_t getLine() const CORE_NOEXCEPT
+    {
+        return m_line;
+    }
 
   private:
     CORE_NODISCARD std::string composeLogMessage() const CORE_NOEXCEPT

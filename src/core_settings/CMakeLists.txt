@@ -91,6 +91,7 @@ if (Core_USE_WARNINGS)
                 "-Wno-unused-template"
                 # https://bugs.llvm.org/show_bug.cgi?id=44325
                 "-Wno-zero-as-null-pointer-constant"
+                "-Wno-shadow-field-in-constructor"
                 )
     elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
         message(STATUS "Compiler Settings ${CMAKE_CXX_COMPILER_ID}")
@@ -179,6 +180,7 @@ if (Core_USE_WARNINGS)
                 # -Wzero-as-null-pointer-constant does not work with the `operator<=>`
                 # emulation
                 # "-Wzero-as-null-pointer-constant"
+                "-Wno-shadow-field-in-constructor"
                 )
     endif ()
 endif ()

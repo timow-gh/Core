@@ -1,7 +1,7 @@
 set(Core_Utils_HEADERS
         include/Core/Utils/Assert.hpp
         include/Core/Utils/Compiler.hpp
-        )
+        include/Core/Utils/Warnings.h)
 
 add_library(Core_Utils INTERFACE ${Core_Utils_HEADERS})
 

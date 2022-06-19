@@ -24,7 +24,10 @@ if(NOT Core_Types_CXX_STANDARD)
 endif()
 
 target_include_directories(Core_Types INTERFACE "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}>")
-target_link_libraries(Core_Types INTERFACE Core::Utils nonstd::span-lite nonstd::string-view-lite)
+target_link_libraries(Core_Types INTERFACE
+        Core::Utils 
+        nonstd::span-lite
+        nonstd::string-view-lite)
 
 set(TARGET_ALIAS Types)
 add_library(${PROJECT_NAME}::${TARGET_ALIAS} ALIAS Core_Types)
