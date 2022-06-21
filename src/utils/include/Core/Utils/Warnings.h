@@ -11,12 +11,12 @@
     DO_PRAGMA(clang diagnostic ignored "-Weverything")
 #elif defined(__GNUC__)
 #define DISABLE_ALL_WARNINGS                                                   \
-    DO_PRAGMA(GCC diagnostic push)                                           \
+    DO_PRAGMA(GCC diagnostic push)                                             \
     DO_PRAGMA(GCC diagnostic ignored "-Weverything")
 #endif
 
 #if defined(_MSC_VER)
-#define ENABLE_ALL_WARNINGS _Pragma warning(pop)
+#define ENABLE_ALL_WARNINGS DO_PRAGMA(warning(pop))
 #elif defined(__clang__)
 #define ENABLE_ALL_WARNINGS DO_PRAGMA(clang diagnostic pop)
 #elif defined(__GNUC__)
