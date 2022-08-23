@@ -3,9 +3,9 @@
 #include <Core/Types/TVector.hpp>
 #include <gtest/gtest.h>
 
-std::size_t calcSize(Core::TSpan<const int> spn)
+std::size_t calcSize(Core::TSpan<int> span)
 {
-    return spn.size();
+    return span.size();
 }
 
 TEST(Test_TSpan, SpanFromArray)
@@ -18,6 +18,6 @@ TEST(Test_TSpan, SpanFromArray)
 TEST(Test_TSpan, SpanFromDynamicArray)
 {
     Core::TVector<int> vec = {0, 1, 2};
-    std::size_t size = calcSize(vec);
+    std::size_t size = calcSize({vec.begin(), vec.end()});
     EXPECT_EQ(size, 3);
 }
