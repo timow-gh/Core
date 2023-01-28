@@ -1,0 +1,4 @@
+add_subdirectory(test_install)
+add_subdirectory(test_math)
+add_subdirectory(test_types)
+add_subdirectory(test_utils)

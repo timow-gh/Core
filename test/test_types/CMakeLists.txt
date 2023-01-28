@@ -1,0 +1,12 @@
+function(create_test testName)
+    add_executable(${testName} ${testName}.cpp)
+    target_link_libraries(${testName} PRIVATE gtest_main Core::Types)
+    add_test(NAME example_library.${testName} COMMAND ${testName})
+endfunction()
+
+create_test(test_TVector)
+create_test(test_TSet)
+create_test(test_TSpan)
+create_test(test_TStringView)
+create_test(test_TMap)
+create_test(test_THashMap)

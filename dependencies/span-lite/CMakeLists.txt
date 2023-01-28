@@ -1,5 +1,6 @@
-FetchContent_Declare(
-        span-lite
-        GIT_REPOSITORY https://github.com/martinmoene/span-lite.git
-        GIT_TAG v0.10.3)
-FetchContent_MakeAvailable(span-lite)
+CPMAddPackage(
+        NAME span-lite
+        GITHUB_REPOSITORY martinmoene/span-lite
+        GIT_TAG v0.10.3
+        GIT_SHALLOW TRUE
+)
