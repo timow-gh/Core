@@ -49,21 +49,17 @@ endif ()
 
 if (${PROJECT_NAME}_INSTALL)
     install(FILES ${HEADER_FILES} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/${TARGET_ALIAS_NAME}"
-            #            COMPONENT ${TARGET_ALIAS_NAME}_Development
             )
 
     install(TARGETS ${TARGET_NAME} string-view-lite
             EXPORT ${PROJECT_NAME}TargetsExportSet
             RUNTIME
             DESTINATION ${CMAKE_INSTALL_BINDIR}
-            #            COMPONENT ${TARGET_ALIAS_NAME}_Runtime
             LIBRARY
             DESTINATION ${CMAKE_INSTALL_LIBDIR}
-            #            COMPONENT ${TARGET_ALIAS_NAME}_Runtime
-            #            NAMELINK_COMPONENT ${TARGET_ALIAS_NAME}_Development
             ARCHIVE
             DESTINATION ${CMAKE_INSTALL_LIBDIR}
-            #            COMPONENT ${TARGET_ALIAS_NAME}_Development
+            INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
             )
 endif ()
 
