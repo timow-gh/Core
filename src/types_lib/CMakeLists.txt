@@ -39,7 +39,7 @@ set_target_properties(${TARGET_NAME}
         EXPORT_NAME ${TARGET_ALIAS_NAME}
         )
 
-include(Warnings)
+include(warnings)
 add_warnings_and_compile_options(${TARGET_NAME} ${PROJECT_NAME}_WARNINGS_AS_ERRORS)
 
 if (${PROJECT_NAME}_STATIC_ANALYSIS)
