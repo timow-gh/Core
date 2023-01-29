@@ -5,7 +5,7 @@ set(HEADER_FILES
 set(TARGET_NAME tw_core_math)
 set(TARGET_ALIAS_NAME Math)
 
-add_library(${TARGET_NAME} INTERFACE)
+add_library(${TARGET_NAME} INTERFACE ${HEADER_FILES})
 
 target_link_libraries(${TARGET_NAME} INTERFACE Core::Utils)
 

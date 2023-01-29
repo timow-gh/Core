@@ -6,7 +6,7 @@ set(HEADER_FILES
 set(TARGET_NAME tw_core_utils)
 set(TARGET_ALIAS_NAME Utils)
 
-add_library(${TARGET_NAME} INTERFACE)
+add_library(${TARGET_NAME} INTERFACE ${HEADER_FILES})
 add_library(${PROJECT_NAME}::${TARGET_ALIAS_NAME} ALIAS ${TARGET_NAME})
 
 target_include_directories(${TARGET_NAME}

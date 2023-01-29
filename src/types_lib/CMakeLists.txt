@@ -11,7 +11,7 @@ set(HEADER_FILES
 set(TARGET_NAME tw_core_types)
 set(TARGET_ALIAS_NAME Types)
 
-add_library(${TARGET_NAME} INTERFACE)
+add_library(${TARGET_NAME} INTERFACE ${HEADER_FILES})
 
 target_link_libraries(${TARGET_NAME} INTERFACE
         Core::Utils
