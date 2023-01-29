@@ -1,4 +1,4 @@
-set(test_target "tw_core_math")
+set(test_target "core")
 set(${test_target}_TEST_INSTALL_DIR "${CMAKE_CURRENT_BINARY_DIR}/${test_target}_install_dir")
 set(${test_target}_TEST_SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/${test_target}_use_install_test")
 set(${test_target}_TEMPLATE_PROJECT_DIR "${CMAKE_CURRENT_LIST_DIR}/${test_target}_install_test_template")
