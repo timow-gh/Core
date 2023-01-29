@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         build_type: [Debug, Release]
-        std: [11, 20]
+        std: [14, 20]
         include:
           - shared: -DBUILD_SHARED_LIBS=ON
 

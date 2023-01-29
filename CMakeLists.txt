@@ -85,6 +85,14 @@ message(STATUS "${PROJECT_NAME}_USE_SCCACHE: ${${PROJECT_NAME}_USE_SCCACHE}")
 message(STATUS "${PROJECT_NAME}_WARNINGS_AS_ERRORS: ${${PROJECT_NAME}_WARNINGS_AS_ERRORS}")
 message(STATUS "${PROJECT_NAME}_STATIC_ANALYSIS: ${${PROJECT_NAME}_STATIC_ANALYSIS}")
 
+if (CMAKE_CXX_STANDARD)
+    if (CMAKE_CXX_STANDARD LESS 14)
+        message(FATAL_ERROR "LinAl requires C++14 or greater. CMAKE_CXX_STANDARD is set to ${CMAKE_CXX_STANDARD}.")
+    endif ()
+else ()
+    message(FATAL_ERROR "CMAKE_CXX_STANDARD is not set. LinAl requires C++14 or greater.")
+endif ()
+
 add_subdirectory(dependencies)
 
 add_subdirectory(src)
