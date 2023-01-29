@@ -15,7 +15,8 @@
   DO_PRAGMA(GCC diagnostic ignored "-Wall")                                                                                                \
   DO_PRAGMA(GCC diagonstic ignored "-Wextra")                                                                                              \
   DO_PRAGMA(GCC diagnostic ignored "-Werror")                                                                                              \
-  DO_PRAGMA(GCC diagnostic ignored "-Wpedantic")
+  DO_PRAGMA(GCC diagnostic ignored "-Wpedantic")                                                                                           \
+  DO_PRAGMA(GCC diagnostic ignored "-Wuseless-cast")
 #endif
 
 #if defined(_MSC_VER)
