@@ -2,7 +2,10 @@
 #define CORE_INCLUDE_GUARD_ASSERT_H
 
 #include <Core/Utils/Compiler.hpp>
+#include <Core/Utils/Warnings.hpp>
+DISABLE_ALL_WARNINGS
 #include <debug_assert.hpp>
+ENABLE_ALL_WARNINGS
 
 namespace Core
 {

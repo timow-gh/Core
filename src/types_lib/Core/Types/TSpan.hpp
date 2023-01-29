@@ -2,7 +2,10 @@
 #define CORE_TSPAN_HPP
 
 #include <Core/Utils/Compiler.hpp>
+#include <Core/Utils/Warnings.hpp>
+DISABLE_ALL_WARNINGS
 #include <nonstd/span.hpp>
+ENABLE_ALL_WARNINGS
 
 namespace Core
 {
