@@ -25,7 +25,7 @@ struct global_debug_assertion
 #define CORE_ASSERT_MSG(expr, message)
 #else
 #define CORE_ASSERT(expr) DEBUG_ASSERT(expr, ::Core::global_debug_assertion{})
-#define CORE_ASSERT_MSG(expr, message) (DEBUG_ASSERT(expr, ::Core::global_debug_assertion{}, message))
+#define CORE_ASSERT_MSG(expr, message) DEBUG_ASSERT(expr, ::Core::global_debug_assertion{}, message)
 #endif
 
 /*
