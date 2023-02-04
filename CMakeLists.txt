@@ -30,11 +30,13 @@ project(Core
         VERSION 0.1.0
         LANGUAGES CXX)
 
+# Add CPM to the project, so that subprojects can load the dependencies of this project
+include(${${lcs_twCMakeUtils}_SOURCE_DIR}/modules/CPM.cmake)
+
 # Make all modules available to this project and other projects that consume this project by
 # adding the cmake directory to the CMAKE_MODULE_PATH
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 include(setup_export_set_installation)
-
 include(project_preamble)
 project_preamble()
 
